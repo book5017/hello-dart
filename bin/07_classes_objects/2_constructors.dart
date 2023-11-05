@@ -1,3 +1,4 @@
+import 'dart:math';
 /////////////////////////////////////////////////////////
 // TODO Constructor
 class Point {
@@ -100,7 +101,93 @@ class Vector3d2 extends Vector2d2 {
   Vector3d2.yzPlane({required super.y, required this.z}) : super.named(x: 0);
 }
 
+/////////////////////////////////////////////////////////
+// TODO Initializer list
+class Point4 {
+
+  double x = 0;
+  double y = 0;
+
+// Initializer list sets instance variables before
+// the constructor body runs.
+
+  Point4.fromJson(Map<String, double> json)
+      : x = json['x']!,
+        y = json['y']! {
+    print('In Point.fromJson(): ($x, $y)');
+  }
+}
+
+// initializing three final fields in an initializer list.
+class Point5 {
+  final double x;
+  final double y;
+  final double distanceFromOrigin;
+
+  Point5(double x, double y)
+      : x = x,
+        y = y,
+        distanceFromOrigin = sqrt(x * x + y * y);
+
+}
+
+/////////////////////////////////////////////////////////
+// TODO Redirecting constructors
+class Point6 {
+  double x, y;
+
+  // The main constructor for this class.
+  Point6(this.x, this.y);
+
+  // Delegates to the main constructor.
+  Point6.alongXAxis(double x) : this(x, 0);
+}
+
+/////////////////////////////////////////////////////////
+// TODO Constant constructors
+//
+class ImmutablePoint {
+  static const ImmutablePoint origin = ImmutablePoint(0, 0);
+
+  final double x, y;
+
+  const ImmutablePoint(this.x, this.y);
+}
+
+/////////////////////////////////////////////////////////
+// TODO Factory constructors
+//
+class Logger {
+  final String name;
+  bool mute = false;
+
+  // _cache is library-private, thanks to
+  // the _ in front of its name.
+  static final Map<String, Logger> _cache = <String, Logger>{};
+
+  factory Logger(String name) {
+    return _cache.putIfAbsent(name, () => Logger._internal(name));
+  }
+
+  factory Logger.fromJson(Map<String, Object> json) {
+    return Logger(json['name'].toString());
+  }
+
+  Logger._internal(this.name);
+
+  void log(String msg) {
+    if (!mute) print(msg);
+  }
+}
+
 void main() {
   var v2d = Vector2d2.named(x: 1, y: 2);
   var v3d = Vector3d2.yzPlane(y: 3, z: 4);
+
+  var logger = Logger('UI');
+  logger.log('Button clicked');
+
+  var logMap = {'name': 'UI'};
+  var loggerJson = Logger.fromJson(logMap);
+  loggerJson.log('Button clicked2');
 }
