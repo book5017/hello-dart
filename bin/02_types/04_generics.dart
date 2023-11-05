@@ -12,5 +12,9 @@ void main(List<String> arguments) {
   var nameSet = Set<String>.from(names);
   print(nameSet);
 
-  var views = Map<int, View>();
+  // var views = Map<int, View>();
+
+  var names2 = <String>[];
+  names2.addAll(['Seth', 'Kathy', 'Lars']);
+  print(names2 is List<String>); // true
 }
