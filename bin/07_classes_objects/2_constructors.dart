@@ -192,5 +192,5 @@ void main() {
   loggerJson.log('Button clicked2');
 
   assert(logger == loggerJson);
-  assert( (logger, loggerJson));
+  assert(identical(logger, loggerJson));
 }
