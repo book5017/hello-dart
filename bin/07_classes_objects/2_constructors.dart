@@ -190,4 +190,7 @@ void main() {
   var logMap = {'name': 'UI'};
   var loggerJson = Logger.fromJson(logMap);
   loggerJson.log('Button clicked2');
+
+  assert(logger == loggerJson);
+  assert( (logger, loggerJson));
 }
