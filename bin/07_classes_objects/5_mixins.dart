@@ -30,6 +30,10 @@ class Maestro extends Person with Musical, Aggressive, Demented {
     canConduct = true;
   }
 }
+void main() {
+  // var a = Aggressive();
+
+}
 /////////////////////////////////////////////////////////
 // TODO on clause
 // only classes that extend or implement the Musician class can use the mixin MusicalPerformer.
